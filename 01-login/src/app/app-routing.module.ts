@@ -1,24 +1,26 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './pages/home/home.component';
-import { CallbackComponent } from './pages/callback/callback.component';
-import { AuthGuard } from './auth/auth.guard';
-import { ProfileComponent } from './pages/profile/profile.component';
+import { NgModule } from "@angular/core";
+import { Routes, RouterModule } from "@angular/router";
+import { HomeComponent } from "./pages/home/home.component";
+import { CallbackComponent } from "./pages/callback/callback.component";
+import { AuthGuard } from "./auth/auth.guard";
+import { ProfileComponent } from "./pages/profile/profile.component";
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
+import { AppInterceptorService } from "./auth/intercepter.service";
 
 const routes: Routes = [
   {
-    path: 'callback',
+    path: "callback",
     component: CallbackComponent
   },
   {
-    path: 'profile',
+    path: "profile",
     component: ProfileComponent,
     canActivate: [AuthGuard]
   },
   {
-    path: '',
+    path: "",
     component: HomeComponent,
-    pathMatch: 'full'
+    pathMatch: "full"
   }
 ];
 
@@ -26,4 +28,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
