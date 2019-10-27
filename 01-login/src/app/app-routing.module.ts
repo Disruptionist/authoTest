@@ -26,6 +26,9 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AppInterceptorService, multi: true }
+  ]
 })
 export class AppRoutingModule {}
