@@ -49,6 +49,10 @@ export class AuthService {
     );
   }
 
+  getTokenSilently$(): Observable<string>{
+    return this.auth0Client$.pipe(concatMap((client:Auth0Client)=> from(client.getTokenSilently$())));
+  }
+
   localAuthSetup() {
     // This should only be called on app initialization
     // Set up local authentication streams
@@ -68,6 +72,9 @@ export class AuthService {
       // If not authenticated, response will be 'false'
       this.loggedIn = !!response;
     });
+
+    this.getTokenSilently$().subscribe(token=>
+      console.log({"token": token}));
   }
 
   login(redirectPath: string = '/') {
